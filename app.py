@@ -44,6 +44,20 @@ def post_something():
             "ERROR": "no name found, please send a name."
         })
 
+
+@app.route('/event/', methods=['POST'])
+def event_response():
+    challenge = request.form.get('challenge')
+    print(challenge)
+    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
+    if challenge:
+        return jsonify({
+            "challenge": challenge,
+        })
+    else:
+        return jsonify({
+            "ERROR": "no challenge found, please send a name."
+        })
 # A welcome message to test our server
 
 
@@ -54,4 +68,4 @@ def index():
 
 if __name__ == '__main__':
     # Threaded option pip freeze > requirements.txt to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+    app.run(threaded=True, port=5000, debug=True)
